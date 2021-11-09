@@ -13,9 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Route::get('/login', function () {
     return view('dashboard.auth.login');
@@ -29,14 +29,23 @@ Route::get('/signup', 'AuthController@create')->name('dashboard.create.admin');
 Route::post('/signup','AuthController@store')->name('dashboard.store');
 
 
-//home page for all user 
-Route::get('/', function () {
-    return view('dashboard.home');
-})->name('dashboard.home');
+
+// Route::get('/', function () {
+//     return view('dashboard.home.index');
+// })->name('dashboard.home');
+
 
 
 // dashboard for admin only
 Route::middleware(['adminAuth'])->group(function () {
-    Route::any('/admin','HomeController@index')->name('dashboard.index');  
+    Route::get('/','HomeController@index')->name('dashboard.index');  
+    Route::post('logout', 'AuthController@logout')->name('dashboard.logout');
 });
+
+Route::resource('/sliders', 'SliderController')->except(['show', 'edit', 'update']);
+
+
+
+    Route::post('sliders/switch', 'SliderController@switch')
+        ->name('sliders.switch');
 

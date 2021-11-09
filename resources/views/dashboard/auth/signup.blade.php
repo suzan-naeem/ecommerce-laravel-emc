@@ -1,6 +1,6 @@
-@extends('layouts.app')
+@extends('dashboard.layouts.app')
 
-@section('title')Login Page @endsection
+@section('title')SignUp Page @endsection
 
 @section('content')
 @if ($errors->any())
@@ -25,13 +25,13 @@
                 @csrf
                 <div class="form-group ">
                     <div class="col-12">
-                        <input class="form-control" type="text" name="name" required=""  placeholder="Name">
+                        <input class="form-control" type="text" name="name" required="" value="{{ old('name') }}" placeholder="Name">
                     </div>
                 </div>
 
                 <div class="form-group ">
                     <div class="col-12">
-                        <input class="form-control" type="email" name="email" required=""  placeholder="E-mail">
+                        <input class="form-control" type="email" name="email" required=""  value="{{ old('email') }}" placeholder="E-mail">
                     </div>
                 </div>
 

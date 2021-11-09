@@ -15,9 +15,14 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', function () {
-    return view('dashboard.home');
+    return view('website.home.home');
 })->name('dashboard.home');
 
-
+Route::get('lang/{locale}', function ($locale) {
+    if (in_array($locale, config()->get('app.locales'))) {
+        session(['locale' => $locale]);
+    }
+    return redirect()->back();
+})->name('lang');
 
 

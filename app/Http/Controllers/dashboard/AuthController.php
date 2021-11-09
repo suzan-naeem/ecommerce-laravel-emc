@@ -14,8 +14,10 @@ class AuthController extends Controller
        
             $credentials = $request->only('email','password');
             
-            if(auth('admin')->attempt(['email' => request('email'), 'password' => request('password')])){
-                return view('dashboard.index');
+            if(auth('admin')->attempt($credentials)){
+                //return view('dashboard.home.index');
+                return redirect()->route('dashboard.index');
+
             } else {
                 return redirect()->back()->with('danger', 'email or password is incorrect');
                 // return view('dashboard.auth.login');
@@ -27,7 +29,7 @@ class AuthController extends Controller
 
     public function logout()
     {
-        Auth::logout();
+        auth('admin')->logout();
         return redirect()->route('dashboard.login');
     }
     public function create()
