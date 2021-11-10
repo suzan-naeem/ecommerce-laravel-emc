@@ -33,40 +33,17 @@ class SliderController extends Controller
     
     public function store(Request $request)
     {
-        // $singleSlider =  Slider::create( $request->all());
-        // $singleImag = Upload::uploadImage($request->file('image'), 'slider');
-
+       
         $singleImag = Upload::uploadImage($request->file('image'), 'slider');
 
-        DB::table('sliders')->insert([
-            'image'         => $singleImag,
-            'display'       => $request->display,
-            // 'display'       => $request->get('display'),
-            'created_at'    => date('Y-m-d H:i:s'),
-            'updated_at'    => date('Y-m-d H:i:s'),
- 
-        ]);
+        $singleSlider = new Slider();
+        $singleSlider->image = $singleImag;
+        $singleSlider->save();
+        
         return redirect()->back()->with('success', __('messages.imageAddedSuccessfully'));
 
     }
 
-   
-    public function show($id)
-    {
-        //
-    }
-
-   
-    public function edit($id)
-    {
-        //
-    }
-
-  
-    public function update(Request $request, $id)
-    {
-        //
-    }
 
     
     public function destroy($id)
@@ -84,10 +61,6 @@ class SliderController extends Controller
         $slider->display = $request->display;
         $slider->save();
 
-
-        // $slider = Slider::findOrFail(request('id'));
-        // $slider->display = request('display');
-        // $slider->save();
     }
 
 
