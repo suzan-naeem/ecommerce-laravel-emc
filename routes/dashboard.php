@@ -40,12 +40,14 @@ Route::post('/signup','AuthController@store')->name('dashboard.store');
 Route::middleware(['adminAuth'])->group(function () {
     Route::get('/','HomeController@index')->name('dashboard.index');  
     Route::post('logout', 'AuthController@logout')->name('dashboard.logout');
+
+    Route::resource('/sliders', 'SliderController')->except(['show', 'edit', 'update']);
+    Route::post('sliders/switch', 'SliderController@switch')->name('sliders.switch');
+
+    Route::resource('/categories', 'CategoryController');
+    Route::post('categories/switch', 'CategoryController@switch')->name('categories.switch');
+    Route::get('categories/{category}/products', 'CategoryController@products') ->name('categories.products');        
+    
 });
 
-Route::resource('/sliders', 'SliderController')->except(['show', 'edit', 'update']);
-
-
-
-    Route::post('sliders/switch', 'SliderController@switch')
-        ->name('sliders.switch');
-
+    

@@ -29,7 +29,13 @@
                             <li><a href="{{ route('sliders.create') }}">@lang('dashboard.addImage')</a></li>
                         </ul>
                     </li>
-                    
+                    <li id="itemCategory" class="has-submenu">
+                        <a href="#"><i class="fa fa-sitemap"></i>@lang('dashboard.categories')</a>
+                        <ul class="submenu">
+                            <li><a href="{{route('categories.index')}}">@lang('dashboard.viewAll')</a></li>
+                            <li><a href="{{route('categories.create')}}">@lang('dashboard.addCategory')</a></li>
+                        </ul>
+                    </li>
 
                     <li><a href="{{ route('lang', app()->getLocale() == 'en' ? 'ar' : 'en') }}"><i class="md md-language"></i> <span style="color: black;">@lang('dashboard.lang')</span></a></li>
                    
