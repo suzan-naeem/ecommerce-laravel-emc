@@ -38,6 +38,7 @@ class SliderController extends Controller
 
         $singleSlider = new Slider();
         $singleSlider->image = $singleImag;
+        $singleSlider->display = $request->display;
         $singleSlider->save();
         
         return redirect()->back()->with('success', __('messages.imageAddedSuccessfully'));
