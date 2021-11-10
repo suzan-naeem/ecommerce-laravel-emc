@@ -33,7 +33,11 @@ class SliderController extends Controller
     
     public function store(Request $request)
     {
+<<<<<<< HEAD
 
+=======
+       
+>>>>>>> 15ce12d4f174095583c64340e71e013d0cb021ab
         $singleImag = Upload::uploadImage($request->file('image'), 'slider');
         //'http://127.0.0.1:8000/uploads/slider/1636533450.jpg'
 
@@ -41,13 +45,21 @@ class SliderController extends Controller
         $singleSlider->image = $singleImag;
         $singleSlider->display = $request->display;
         $singleSlider->save();
+<<<<<<< HEAD
+=======
+        
+        return redirect()->back()->with('success', __('messages.imageAddedSuccessfully'));
+>>>>>>> 15ce12d4f174095583c64340e71e013d0cb021ab
 
         return redirect()->back()->with('success', __('messages.imageAddedSuccessfully'));
 
+<<<<<<< HEAD
      
 
     }
 
+=======
+>>>>>>> 15ce12d4f174095583c64340e71e013d0cb021ab
 
     
     public function destroy($id)
@@ -65,10 +77,6 @@ class SliderController extends Controller
         $slider->display = $request->display;
         $slider->save();
 
-
-        // $slider = Slider::findOrFail(request('id'));
-        // $slider->display = request('display');
-        // $slider->save();
     }
 
 
