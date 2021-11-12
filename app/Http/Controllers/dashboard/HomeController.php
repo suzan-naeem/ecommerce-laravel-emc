@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Product;
 // use App\Models\Product;
 use App\Models\Slider;
 
@@ -15,9 +16,10 @@ class HomeController extends Controller
     {
         $sliderCount            = Slider::all()->count();
         $categoriesCount        = Category::all()->count();
+        $productsCount          = Product::all()->count();
         return view('dashboard.home.index',
             compact(
-                'sliderCount','categoriesCount'
+                'sliderCount','categoriesCount','productsCount'
             ));
     }
 }

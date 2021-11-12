@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryRequest;
+use App\Models\Product;
 
 class CategoryController extends Controller
 {
@@ -33,18 +34,20 @@ class CategoryController extends Controller
 
     public function store(CategoryRequest $request)
     {
-        $next_id = DB::select("SHOW TABLE STATUS LIKE 'categories'");
-        $next_id = $next_id[0]->Auto_increment;
-        $imageName = Upload::uploadImage($request->file('image'), 'categories/' . $next_id);
+        // $next_id = DB::select("SHOW TABLE STATUS LIKE 'categories'");
+        // $next_id = $next_id[0]->Auto_increment;
+        // $imageName = Upload::uploadImage($request->file('image'), 'categories/' . $next_id);
         //'http://127.0.0.1:8000/uploads/categories/1/1636534671.jpg'
 
         $category = new Category();
         $category->name_ar = $request->name_ar;
         $category->name_en = $request->name_en;
         $category->display = $request->display;
-        $category->image = $imageName;
+        $category->image = Upload::uploadImage($request->file('image'), 'categories');
         $category->save();
+        // $id = $category->id;
         
+
         return redirect()->back()->with('success', __('messages.categoryAddedSuccessfully'));
     }
 
@@ -56,7 +59,8 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        //
+        $category = Category::findOrFail($id);
+        return view('dashboard.category.show',['category'=> $category]);
     }
 
     /**
@@ -101,10 +105,14 @@ class CategoryController extends Controller
     public function destroy($id)
     {
             $category = Category::findOrFail($id);
+        if (!$category->products) {
             Upload::deleteDirectory('categories/' . $category->id);
             $category->delete();
             return redirect()->back()->with('success', __('messages.categoryDeletedSuccessfully'));
-    
+        } else {
+            return redirect()->back()->with('danger', __('messages.categoryHasProducts'));
+        }
+
     }
 
     /**
@@ -117,6 +125,23 @@ class CategoryController extends Controller
         $category = Category::findOrFail($id);
         $category->display = $request->display;
         $category->save();
+    }
+
+    public function products($id)
+    {
+        $products = Product::where([
+            ['category_id', $id],
+            ['display', 1]
+        ])->get([
+            'id',
+            "name_" . app()->getLocale() . " as name"
+        ]);
+
+        if (!$products) {
+            $products = [];
+        }
+
+        return response()->json($products, 200);
     }
 
        

@@ -28,7 +28,8 @@ class Upload
         foreach ($images as $image) {
             $name = time() . '_' . rand(0, 10000) . '.' . $image->getClientOriginalExtension();
             Storage::disk('public')->put($path . '/' . $name, File::get($image));
-            $imagesName[] = url('/') . '/uploads/' . $path . '/' . $name;
+            $img = url('/') . '/uploads/' . $path . '/' . $name;
+            array_push($imagesName,$img);
         }
         return $imagesName;
     }

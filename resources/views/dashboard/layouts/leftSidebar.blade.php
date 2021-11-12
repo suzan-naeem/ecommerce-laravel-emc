@@ -36,6 +36,14 @@
                             <li><a href="{{route('categories.create')}}">@lang('dashboard.addCategory')</a></li>
                         </ul>
                     </li>
+                    <li id="itemProducts" class="has-submenu">
+                        <a href="#"><i class="fa fa-apple"></i>@lang('dashboard.products')</a>
+                        <ul class="submenu">
+                            <li><a href="{{ route('products.index') }}">@lang('dashboard.viewAll')</a></li>
+                            <li><a href="{{ route('products.create') }}">@lang('dashboard.addProduct')</a></li>
+                        </ul>
+                    </li>
+                    
 
                     <li><a href="{{ route('lang', app()->getLocale() == 'en' ? 'ar' : 'en') }}"><i class="md md-language"></i> <span style="color: black;">@lang('dashboard.lang')</span></a></li>
                    
