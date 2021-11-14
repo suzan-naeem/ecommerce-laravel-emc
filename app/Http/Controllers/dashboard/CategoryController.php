@@ -105,7 +105,7 @@ class CategoryController extends Controller
     public function destroy($id)
     {
             $category = Category::findOrFail($id);
-        if (!$category->products) {
+        if ($category->products->count() == 0) {
             Upload::deleteDirectory('categories/' . $category->id);
             $category->delete();
             return redirect()->back()->with('success', __('messages.categoryDeletedSuccessfully'));

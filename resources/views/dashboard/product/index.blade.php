@@ -98,12 +98,14 @@
                                                 <input class="on" data-id="{{ $product['id'] }}" type="checkbox" data-plugin="switchery" data-color="#81c868"/>
                                                 @endif
                                             </td>
-                                            <td>
+
+                                           {{-- <td>
                                                 <a href="{{ route('products.show', $product['id']) }}" class="on-default"><i class="fa fa-eye"></i></a>
-                                            </td>
+                                            </td> --}}
                                             {{-- <td>
                                                 <a href="{{ route('products.comments', $product['id']) }}" class="on-default"><i class="fa fa-comment-o"></i></a>
                                             </td> --}}
+
                                             <td>
                                                 <a href="{{ route('products.edit', $product['id']) }}" class="on-default"><i class="fa fa-pencil"></i></a>
                                             </td>
