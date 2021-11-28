@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\website\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,9 +15,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/', function () {
-    return view('website.home.home');
-})->name('dashboard.home');
+// Route::get('/', function () {
+//     return view('website.home.home');
+// })->name('dashboard.home');
+
+Route::get('/',[HomeController::class,'index'])->name('dashboard.home');  
+
 
 Route::get('lang/{locale}', function ($locale) {
     if (in_array($locale, config()->get('app.locales'))) {

@@ -71,10 +71,10 @@
                                         <label for="weight">@lang('dashboard.weight')</label>
                                         <input id="weight" type="text" name="weight" required placeholder="@lang('dashboard.weight')" class="form-control" value="{{ $product['weight'] }}">
                                     </div>
-                                    <div class="form-group col-md-6">
+                                    <!-- <div class="form-group col-md-6">
                                         <label for="cost">@lang('dashboard.cost')</label>
                                         <input id="cost" type="text" name="cost" required placeholder="@lang('dashboard.cost')" class="form-control" value="{{ $product['cost'] }}">
-                                    </div>
+                                    </div> -->
                                     <div class="form-group col-md-6">
                                         <label for="discountType">@lang('dashboard.isThereDiscount')</label>
                                         <select id="discountType" name="discountType" required class="form-control">

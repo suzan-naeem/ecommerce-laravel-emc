@@ -12,8 +12,7 @@ class IsAdmin
     {
         if(!auth('admin')->check()){
             return redirect()->route('dashboard.login');
-
-           
+ 
         }
         return $next($request);
     }
